@@ -46,7 +46,7 @@ extension Scene {
             }
             
             composeVC.bind(viewModel: viewModel)
-            return composeVC
+            return nav
         }
     }
 }
