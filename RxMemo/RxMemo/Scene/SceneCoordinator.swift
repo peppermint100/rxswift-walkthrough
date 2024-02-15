@@ -52,8 +52,10 @@ class SceneCoordinator: SceneCoordinatorType {
     func close(animated: Bool) -> RxSwift.Completable {
         return Completable.create{ [unowned self] completable in
             if let presentingVC = self.currentVC.presentingViewController {
-                self.currentVC.dismiss(animated: animated)
-                completable(.completed)
+                self.currentVC.dismiss(animated: animated) {
+                    self.currentVC = presentingVC
+                    completable(.completed)
+                }
             } else if let nav = self.currentVC.navigationController {
                 guard nav.popViewController(animated: animated) != nil else {
                     completable(.error(TransitionError.cannotPop))
