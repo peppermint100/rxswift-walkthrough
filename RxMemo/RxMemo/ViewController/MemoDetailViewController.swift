@@ -43,13 +43,24 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         
         editButton.rx.action = viewModel.makeEditAction()
         
-        shareButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                guard let memo = self?.viewModel.memo.content else { return }
-                let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
-                self?.present(vc, animated: true, completion: nil)
-            })
-            .disposed(by: rx.disposeBag)
+        /*
+         action 방식과 tap 방식의 차이점
+         action 방식
+         - viewModel에서 만드므로 Scene과 연결해줄 필요가 있었음
+         - ActivityController의 close 버튼과 SceneCoordinator의 close도 연결해주어야 함
+         - 로직이 viewModel에 집중되어 구조적으로 좋음
+         tap 방식
+         - 간단함
+         - SceneCoordinator를 거치지 않음
+         */
+        shareButton.rx.action = viewModel.makeShareAction()
+//        shareButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] _ in
+//                guard let memo = self?.viewModel.memo.content else { return }
+//                let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
+//                self?.present(vc, animated: true, completion: nil)
+//            })
+//            .disposed(by: rx.disposeBag)
     }
 
     override func viewDidLoad() {

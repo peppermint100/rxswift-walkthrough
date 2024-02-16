@@ -11,6 +11,7 @@ enum Scene {
     case list(MemoListViewModel)
     case detail(MemoDetailViewModel)
     case compose(MemoComposeViewModel)
+    case activity([Any])
 }
 
 extension Scene {
@@ -47,6 +48,9 @@ extension Scene {
             
             composeVC.bind(viewModel: viewModel)
             return nav
+        case .activity(let activityItems):
+            let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            return vc
         }
     }
 }

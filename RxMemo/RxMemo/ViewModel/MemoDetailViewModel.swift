@@ -64,4 +64,12 @@ class MemoDetailViewModel: CommonViewModel {
             return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true).asObservable().map { _ in }
         }
     }
+    
+    func makeShareAction() -> CocoaAction {
+        return CocoaAction { _ in
+            let activityScene = Scene.activity([self.memo])
+            return self.sceneCoordinator.transition(to: activityScene, using: .modal, animated: true)
+                .asObservable().map { _ in }
+        }
+    }
 }
