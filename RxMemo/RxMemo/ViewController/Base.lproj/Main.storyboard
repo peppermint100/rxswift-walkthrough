@@ -183,10 +183,10 @@
                     <navigationItem key="navigationItem" title="메모 보기" id="xf4-II-ePg"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="deleteButton" destination="RPR-Hc-2YO" id="9HJ-Y4-tOg"/>
-                        <outlet property="editButton" destination="RPR-Hc-2YO" id="v1H-Fv-amN"/>
+                        <outlet property="deleteButton" destination="e0Z-sF-pL3" id="bGs-xE-YEH"/>
+                        <outlet property="editButton" destination="tmG-qC-DOo" id="2Eo-xX-nbx"/>
                         <outlet property="listTableView" destination="ZsP-GQ-Tqb" id="v9w-Ki-Ml9"/>
-                        <outlet property="shareButton" destination="RPR-Hc-2YO" id="IE3-FH-5xk"/>
+                        <outlet property="shareButton" destination="qFQ-kB-sBR" id="VwQ-Xp-qG2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDc-ut-emJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

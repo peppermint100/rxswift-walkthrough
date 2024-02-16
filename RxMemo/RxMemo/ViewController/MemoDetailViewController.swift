@@ -12,9 +12,10 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
     var viewModel: MemoDetailViewModel!
     
     @IBOutlet var listTableView: UITableView!
-    @IBOutlet var deleteButton: UIToolbar!
-    @IBOutlet var editButton: UIToolbar!
-    @IBOutlet var shareButton: UIToolbar!
+    
+    @IBOutlet var shareButton: UIBarButtonItem!
+    @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var deleteButton: UIBarButtonItem!
     
     func bindViewModel() {
         viewModel.title
@@ -37,6 +38,8 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx.disposeBag)
+        
+        editButton.rx.action = viewModel.makeEditAction()
     }
 
     override func viewDidLoad() {
