@@ -23,9 +23,10 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx.disposeBag)
         
         viewModel.memoList
-            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
-                cell.textLabel?.text = memo.content
-            }
+//            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
+//                cell.textLabel?.text = memo.content
+//            }
+            .bind(to: listTableView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: rx.disposeBag)
         
         addButton.rx.action = viewModel.makeCreateAction()
@@ -36,6 +37,11 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             })
             .map { $0.0 }
             .bind(to: viewModel.detailAction.inputs)
+            .disposed(by: rx.disposeBag)
+        
+        // control 액션만 만들어도 자동으로 swipe to delete가 tableview에 추가된다.
+        listTableView.rx.modelDeleted(Memo.self)
+            .bind(to: viewModel.deleteAction.inputs)
             .disposed(by: rx.disposeBag)
     }
 
